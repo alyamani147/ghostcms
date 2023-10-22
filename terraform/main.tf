@@ -56,21 +56,18 @@ resource "aws_instance" "ghost" {
       "sudo curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -",
       "sudo yum install -y nodejs",
       "sudo yum install -y npm",
-      "sudo npm audit fix --force",
-      "sudo npm install -g npm@10.2.1",
       "node -v",
       "npm -v",
       "sudo npm install ghost-cli@latest -g",
-#      "sudo mkdir -p /var/www/ghost",
-#      "sudo chown ec2-user:ec2-user /var/www/ghost",
-#      "sudo cd /var/www/ghost",
+      "sudo npm audit fix --force",
+      "sudo npm install -g npm@10.2.1",
       "sudo ghost install local",
     ]
   }
 
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "sshkeyEC2ghost"
+  name = "sshkeyEC2ghosts"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
