@@ -48,50 +48,31 @@ resource "aws_instance" "ghost" {
     inline = [
       "echo 'Starting provisioner'",
       "sudo yum update -y",
+      "sudo yum install -y openssh-server",
+      "sudo systemctl start sshd",
+      "sudo systemctl enable sshd",
       "sudo amazon-linux-extras install epel -y",
       "sudo yum install -y gcc-c++ make",
       "sudo yum remove libuv -y",
       "sudo wget https://rpmfind.net/linux/epel/7/x86_64/Packages/l/libuv-1.44.2-1.el7.x86_64.rpm",
       "sudo rpm -i libuv-1.44.2-1.el7.x86_64.rpm",
-      "sudo curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -",
-      "sudo yum install -y nodejs",
+      "sudo yum install https://rpm.nodesource.com/pub_18.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y",
+      "sudo yum install nodejs -y --setopt=nodesource-nodejs.module_hotfixes=1",
       "sudo yum install -y npm",
+      "sudo npm install -g npm@10.2.1",
       "node -v",
       "npm -v",
       "sudo npm install ghost-cli@latest -g",
       "sudo npm audit fix --force",
-      "sudo npm install -g npm@10.2.1",
       "sudo ghost install local",
     ]
   }
-#  provisioner "remote-exec" {
-#    inline = [
-#      "usermod -aG sudo ubuntu",
-#      "su - ubuntu",
-#      "sudo apt-get update",
-#      "sudo apt-get upgrade",
-#      "sudo apt-get install nginx",
-#      "sudo ufw allow 'Nginx Full'",
-#      "sudo apt-get install mysql-server",
-#      "sudo apt-get update",
-#      "sudo apt-get install -y ca-certificates curl gnupg",
-#      "sudo mkdir -p /etc/apt/keyrings",
-#      "sudo curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg NODE_MAJOR=18",
-#      "echo \"deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main",
-#      "sudo tee /etc/apt/sources.list.d/nodesource.list",
-#      "sudo apt-get update",
-#      "sudo apt-get install nodejs -y",
-#      "sudo npm install ghost-cli@latest -g",
-#      "sudo mkdir -p /var/www/ghost",
-#      "sudo chown ubuntu:ubuntu /var/www/ghost",
-#      "sudo chmod 775 /var/www/ghost",
-#      "cd /var/www/ghost",
-#      "sudo ghost install"
-#    ]
-#  }
+  lifecycle {
+    ignore_changes = [provisioner]
+  }
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "sshkeyALMEC2ghosts"
+  name = "GhostKeyEC2"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
