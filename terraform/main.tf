@@ -46,14 +46,15 @@ resource "aws_instance" "ghost" {
   # Provisioners for installing and configuring Ghost CMS
   provisioner "remote-exec" {
     inline = [
-      "/usr/bin/sudo /usr/bin/sudo apt-get update",
-      "/usr/bin/sudo /usr/bin/sudo apt-get install -y nodejs",
-      "/usr/bin/sudo /usr/bin/sudo apt-get install -y npm",
-      "/usr/bin/sudo /usr/bin/sudo npm install -g ghost-cli",
-      "/usr/bin/sudo /usr/bin/sudo mkdir -p /var/www/ghost",
-      "/usr/bin/sudo /usr/bin/sudo chown ec2-user:ec2-user /var/www/ghost",
-      "/usr/bin/sudo /usr/bin/sudo cd /var/www/ghost",
-      "/usr/bin/sudo /usr/bin/sudo ghost install",
+      "echo 'Starting provisioner' >> /tmp/provision.log",
+      "/usr/bin/sudo /usr/bin/sudo apt-get update  >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo apt-get install -y nodejs >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo apt-get install -y npm >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo npm install -g ghost-cli >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo mkdir -p /var/www/ghost >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo chown ec2-user:ec2-user /var/www/ghost >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo cd /var/www/ghost >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo ghost install >> /tmp/provision.log 2>&1",
     ]
   }
 }
