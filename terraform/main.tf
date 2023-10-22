@@ -31,9 +31,11 @@ resource "aws_instance" "ghost" {
   }
 }
 
-
-resource "aws_security_group" "ghost" {
+data "aws_security_group" "selected" {
   name        = "ghost_security_group"
+}
+resource "aws_security_group" "ghost" {
+  name        = data.aws_security_group.selected.name
   description = "Security group for Ghost CMS instance"
 
   ingress {
