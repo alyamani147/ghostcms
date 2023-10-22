@@ -67,9 +67,6 @@ resource "aws_instance" "ghost" {
       "sudo ghost install local",
     ]
   }
-  lifecycle {
-    ignore_changes = [provisioner]
-  }
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
   name = "GhostKeyEC2"
