@@ -1,48 +1,38 @@
 provider "aws" {
-  region = "eu-central-1"
+  region = var.aws_region_eu-central-1
 }
 
+# EC2 instance
 resource "aws_instance" "ghost" {
-  ami           = "ami-0fb820135757d28fd"
-  instance_type = "t2.micro"
+  ami           = var.ami_id_ghost
+  instance_type = var.instance_type_t2mirco
+  key_name      = var.key_name
+  subnet_id     = var.subnet_id_ghost
 
-  key_name = var.key_name
-
-  vpc_security_group_ids = [aws_security_group.ghost.id]
-
- provisioner "file" {
-    source      = "./provision.sh"
-    destination = "/tmp/provision.sh"
+  # Tag for identification
+  tags = {
+    Name = "Ghost-CMS"
   }
 
+  # Connection settings for provisioners
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = file("${path.module}/id_rsa")
+    host        = self.public_ip
+  }
+
+  # Provisioners for installing and configuring Ghost CMS
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/provision.sh",
-      "/tmp/provision.sh",
+      "sudo apt-get update",
+      "sudo apt-get install -y nodejs",
+      "sudo apt-get install -y npm",
+      "sudo npm install -g ghost-cli",
+      "sudo mkdir -p /var/www/ghost",
+      "sudo chown ubuntu:ubuntu /var/www/ghost",
+      "cd /var/www/ghost",
+      "ghost install",
     ]
   }
-}
-
-
-resource "aws_security_group" "ghost" {
-  name        = "ghost_security_group"
-  description = "Security group for Ghost CMS instance"
-
-  ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Restricting this to my IP, but since I don't have a real IP yet, will keep it open
-  }
-
-  egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-output "public_ip" {
-  value = aws_instance.ghost.public_ip
 }
