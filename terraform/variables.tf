@@ -10,7 +10,7 @@ variable "subnet_id_ghost" {
 
 variable "ami_id_ghost" {
   description = "The ID of the base AMI."
-  default     = "ami-0e80cdc14ed2f397b"
+  default     = "ami-06dd92ecc74fdfb36"
 }
 
 variable "instance_type_t2mirco" {
