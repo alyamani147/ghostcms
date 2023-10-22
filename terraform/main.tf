@@ -48,6 +48,7 @@ resource "aws_instance" "ghost" {
     inline = [
       "while sudo lsof /var/lib/rpm/.dbenv.lock; do sleep 10; done",
       "sudo echo 'Starting provisioner'",
+      "/usr/bin/sudo /usr/bin/yum install -y epel-release >> /tmp/provision.log 2>&1",
       "sudo yum -y update",
       "sudo yum -y install nodejs",
       "sudo yum -y install npm",
