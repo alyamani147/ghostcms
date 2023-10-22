@@ -22,7 +22,7 @@ jobs:
         terraform_version: 1.0.0
 
     - name: Change to Terraform directory
-      run: cd c:/ghostcms/terraform
+      run: cd alyamani147/ghostcms/terraform
 
     - name: Terraform Init
       run: terraform init
