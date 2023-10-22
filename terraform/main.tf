@@ -51,7 +51,7 @@ resource "aws_instance" "ghost" {
       "/usr/bin/sudo /usr/bin/sudo yum install -y gcc-c++ make >> /tmp/provision.log 2>&1",
       "/usr/bin/sudo /usr/bin/sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash >> /tmp/provision.log 2>&1",
       "export NVM_DIR=\"$([ -z \"${XDG_CONFIG_HOME-}\" ] && printf %s \"${HOME}/.nvm\" || printf %s \"${XDG_CONFIG_HOME}/nvm\")\"",
-      "[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" >> /tmp/provision.log 2>&1",
+      "[ -s \"$NVM_DIR/nvm.sh\" ] && \". \"$NVM_DIR/nvm.sh\" >> /tmp/provision.log 2>&1",
       "[ -s \"$NVM_DIR/bash_completion\" ] && \". \"$NVM_DIR/bash_completion\" >> /tmp/provision.log 2>&1",
       "/usr/bin/sudo /usr/bin/sudo nvm install 18 >> /tmp/provision.log 2>&1",
       "/usr/bin/sudo /usr/bin/sudo nvm use 18 >> /tmp/provision.log 2>&1",
