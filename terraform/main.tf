@@ -18,7 +18,7 @@ resource "aws_instance" "ghost" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file("id_rsa")
+    private_key = file("ghostsshkey.pem")
     host        = self.public_ip
   }
 
