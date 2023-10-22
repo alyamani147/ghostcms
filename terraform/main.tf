@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-central-1"
+  region = "us-east-1"
 }
 
 resource "aws_instance" "ghost" {
@@ -10,31 +10,24 @@ resource "aws_instance" "ghost" {
 
   vpc_security_group_ids = [aws_security_group.ghost.id]
 
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo yum update -y
-              sudo amazon-linux-extras install epel -y
-              sudo yum install -y unzip
+    provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get update",
+      "sudo apt-get install -y nginx",
+      "sudo apt-get install -y nodejs",
+      "sudo apt-get install -y npm",
+      "sudo npm install -g ghost-cli",
+      "sudo mkdir -p /var/www/ghost",
+      "sudo chown ec2-user:ec2-user /var/www/ghost",
+      "ghost install",
+    ]
+  }
+}
 
-              # Install Ghost CMS
-              sudo curl -L https://ghost.org/zip/ghost-latest.zip -o ghost-latest.zip
-              sudo unzip -uo ghost-latest.zip -d /var/www/ghost
-              sudo chown -R ec2-user:ec2-user /var/www/ghost
-
-              # Configure Ghost
-              cd /var/www/ghost
-              sudo npm install --production
-              sudo cp config.production.json config.production.json.backup
-              sudo cp config.example.json config.production.json
-
-              # Start Ghost
-              sudo npm start --production
-              EOF
 
   tags = {
     Name = "GhostCMSInstance"
   }
-}
 
 resource "aws_security_group" "ghost" {
   name        = "ghost_security_group"
