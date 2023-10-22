@@ -28,10 +28,6 @@ resource "aws_instance" "ghost" {
       private_key = file("~/.ssh/id_rsa")
       host        = self.public_ip
     }
-
-    tags = {
-      Name = "GhostCMSInstance"
-    }
   }
 }
 
