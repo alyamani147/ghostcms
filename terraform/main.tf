@@ -56,6 +56,7 @@ resource "aws_instance" "ghost" {
       "sudo rpm -i libuv-1.44.2-1.el7.x86_64.rpm",
       "sudo curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -",
       "sudo yum install -y nodejs",
+      "sudo yum install -y npm",
       "node -v",
       "npm -v",
       "sudo npm install -g ghost-cli",
@@ -68,7 +69,7 @@ resource "aws_instance" "ghost" {
 
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "sshghostlatest"
+  name = "sshkeyghostec2"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
