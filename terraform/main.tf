@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "ghost" {
-  ami           = "ami-0fb820135757d28fd"
+  ami           = "ami-0df435f331839b2d6"
   instance_type = "t2.micro"
 
   key_name      = var.key_name
