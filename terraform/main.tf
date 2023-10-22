@@ -91,7 +91,7 @@ resource "aws_instance" "ghost" {
 #  }
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "sshkeyEC2AML2023ghosts"
+  name = "sshkeyALMEC2ghosts"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
