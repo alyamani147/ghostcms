@@ -46,15 +46,15 @@ resource "aws_instance" "ghost" {
   # Provisioners for installing and configuring Ghost CMS
   provisioner "remote-exec" {
     inline = [
-      "echo 'Starting provisioner' >> /tmp/provision.log",
-      "/usr/bin/sudo /usr/bin/yum update -y >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/yum install -y nodejs >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/yum install -y npm >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/npm install -g ghost-cli >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/mkdir -p /var/www/ghost >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/chown ec2-user:ec2-user /var/www/ghost >> /tmp/provision.log 2>&1",
+      "sudo echo 'Starting provisioner'",
+      "sudo yum update -y",
+      "sudo yum install -y nodejs",
+      "sudo yum install -y npm",
+      "sudo npm install -g ghost-cli",
+      "sudo mkdir -p /var/www/ghost",
+      "sudo chown ec2-user:ec2-user /var/www/ghost",
       "cd /var/www/ghost",
-      "/usr/bin/sudo /usr/bin/ghost install >> /tmp/provision.log 2>&1"
+      "sudo ghost install"
     ]
   }
 }
