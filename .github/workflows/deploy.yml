@@ -30,6 +30,9 @@ jobs:
     - name: Change to Terraform directory
       run: cd terraform
 
+    - name: Print current working directory
+      run: pwd
+
     - name: List contents of the Terraform directory
       run: ls -R
 
