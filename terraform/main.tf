@@ -49,7 +49,7 @@ resource "aws_instance" "ghost" {
       "echo 'Starting provisioner'",
       "sudo yum update -y",
       "sudo yum install -y gcc-c++ make",
-      "sudo curl -sL https://rpm.nodesource.com/setup_14.x | bash",
+      "sudo curl -sL https://rpm.nodesource.com/setup_18.x | bash",
       "sudo yum install -y nodejs",
       "sudo npm install -g ghost-cli",
       "sudo mkdir -p /var/www/ghost",
