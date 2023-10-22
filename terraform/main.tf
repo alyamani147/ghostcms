@@ -48,9 +48,6 @@ resource "aws_instance" "ghost" {
     inline = [
       "echo 'Starting provisioner'",
       "sudo yum update -y",
-      "sudo yum install -y openssh-server",
-      "sudo systemctl start sshd",
-      "sudo systemctl enable sshd",
       "sudo amazon-linux-extras install epel -y",
       "sudo yum install -y gcc-c++ make",
       "sudo yum remove libuv -y",
@@ -69,7 +66,7 @@ resource "aws_instance" "ghost" {
   }
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "GhostKeyEC2"
+  name = "GhostKeyEC2Latest"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
