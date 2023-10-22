@@ -17,7 +17,7 @@ resource "aws_instance" "ghost" {
   # Connection settings for provisioners
   connection {
     type        = "ssh"
-    user        = "ubuntu"
+    user        = "ec2-user"
     private_key = file("ghostsshkey.pem")
     host        = self.public_ip
   }
@@ -30,7 +30,7 @@ resource "aws_instance" "ghost" {
       "sudo apt-get install -y npm",
       "sudo npm install -g ghost-cli",
       "sudo mkdir -p /var/www/ghost",
-      "sudo chown ubuntu:ubuntu /var/www/ghost",
+      "sudo chown ec2-user:ec2-user /var/www/ghost",
       "cd /var/www/ghost",
       "ghost install",
     ]
