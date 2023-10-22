@@ -6,11 +6,11 @@ resource "aws_instance" "ghost" {
   ami           = "ami-0df435f331839b2d6"
   instance_type = "t2.micro"
 
-  key_name      = var.key_name
+  key_name = var.key_name
 
   vpc_security_group_ids = [aws_security_group.ghost.id]
 
-    provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
       "sudo apt-get update",
       "sudo apt-get install -y nginx",
@@ -29,8 +29,9 @@ resource "aws_instance" "ghost" {
       host        = self.public_ip
     }
 
-  tags = {
-    Name = "GhostCMSInstance"
+    tags = {
+      Name = "GhostCMSInstance"
+    }
   }
 }
 
