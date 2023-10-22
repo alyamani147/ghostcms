@@ -28,7 +28,7 @@ jobs:
       run: ls -R
 
     - name: Change to Terraform directory
-      run: cd ghostcms/terraform
+      run: cd ~/.terraform
 
     - name: Print current working directory
       run: pwd
