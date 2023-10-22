@@ -42,8 +42,6 @@ resource "aws_instance" "ghost" {
     private_key = file("ghostsshkey.pem")
     host        = self.public_ip
   }
-    on_failure = fail("Command execution failed. See above for details.")
-    inline_shebang = ["/bin/bash -e -x"]
 
   # Provisioners for installing and configuring Ghost CMS
   provisioner "remote-exec" {
