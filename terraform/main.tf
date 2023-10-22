@@ -47,9 +47,9 @@ resource "aws_instance" "ghost" {
   provisioner "remote-exec" {
     inline = [
       "sudo echo 'Starting provisioner'",
-      "sudo yum update -y",
-      "sudo yum install -y nodejs",
-      "sudo yum install -y npm",
+      "sudo yum -y update",
+      "sudo yum -y install nodejs",
+      "sudo yum -y install npm",
       "sudo npm install -g ghost-cli",
       "sudo mkdir -p /var/www/ghost",
       "sudo chown ec2-user:ec2-user /var/www/ghost",
