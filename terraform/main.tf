@@ -10,24 +10,16 @@ resource "aws_instance" "ghost" {
 
   vpc_security_group_ids = [aws_security_group.ghost.id]
 
+ provisioner "file" {
+    source      = "./provision.sh"
+    destination = "/tmp/provision.sh"
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get update",
-      "sudo apt-get install -y nginx",
-      "sudo apt-get install -y nodejs",
-      "sudo apt-get install -y npm",
-      "sudo npm install -g ghost-cli",
-      "sudo mkdir -p /var/www/ghost",
-      "sudo chown $USER:$USER /var/www/ghost",
-      "ghost install",
+      "chmod +x /tmp/provision.sh",
+      "/tmp/provision.sh",
     ]
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("${path.module}/id_rsa")
-      host        = self.public_ip
-    }
   }
 }
 
