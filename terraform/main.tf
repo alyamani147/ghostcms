@@ -48,12 +48,15 @@ resource "aws_instance" "ghost" {
     inline = [
       "echo 'Starting provisioner'",
       "sudo yum update -y",
+      "sudo amazon-linux-extras install epel -y",
       "sudo yum install -y gcc-c++ make",
-      "sudo curl -sL https://rpm.nodesource.com/setup_18.x | bash",
+      "sudo curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -",
       "sudo yum install -y nodejs",
+      "node -v",
+      "npm -v",
       "sudo npm install -g ghost-cli",
       "sudo mkdir -p /var/www/ghost",
-      "sudo chown ec2-user:ec2-user",
+      "sudo chown ec2-user:ec2-user /var/www/ghost",
       "sudo cd /var/www/ghost",
       "sudo ghost install",
     ]
