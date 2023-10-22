@@ -46,17 +46,22 @@ resource "aws_instance" "ghost" {
   # Provisioners for installing and configuring Ghost CMS
   provisioner "remote-exec" {
     inline = [
-      "echo 'Starting provisioner'",
-      "sudo yum update -y",
-      "sudo yum install -y gcc-c++ make",
-      "sudo curl -sL https://rpm.nodesource.com/setup_18.x | bash",
-      "sudo yum install -y nodejs",
-      "sudo npm install -g ghost-cli",
-      "sudo mkdir -p /var/www/ghost",
-      "sudo chown ec2-user:ec2-user",
-      "sudo cd /var/www/ghost",
-      "sudo ghost install",
+      "echo 'Starting provisioner' >> /tmp/provision.log",
+      "/usr/bin/sudo /usr/bin/sudo yum update -y >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo yum install -y gcc-c++ make >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash >> /tmp/provision.log 2>&1",
+      "export NVM_DIR=\"$([ -z \"${XDG_CONFIG_HOME-}\" ] && printf %s \"${HOME}/.nvm\" || printf %s \"${XDG_CONFIG_HOME}/nvm\")\"",
+      "[ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\" >> /tmp/provision.log 2>&1",
+      "[ -s \"$NVM_DIR/bash_completion\" ] && \". \"$NVM_DIR/bash_completion\" >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo nvm install 18 >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo nvm use 18 >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo npm install -g ghost-cli >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo mkdir -p /var/www/ghost >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo chown ec2-user:ec2-user /var/www/ghost >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo cd /var/www/ghost >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/sudo ghost install >> /tmp/provision.log 2>&1",
     ]
   }
+
 
 }
