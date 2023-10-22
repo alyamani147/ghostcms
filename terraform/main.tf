@@ -25,7 +25,7 @@ resource "aws_instance" "ghost" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file("${github.workspace}/id_rsa")
+      private_key = file("${path.module}/id_rsa")
       host        = self.public_ip
     }
   }
