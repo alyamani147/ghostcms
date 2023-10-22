@@ -28,7 +28,7 @@ resource "aws_instance" "ghost" {
   instance_type = var.instance_type_t2mirco
   key_name      = var.key_name
   subnet_id     = var.subnet_id_ghost
-  vpc_security_group_ids = [aws_security_group.ghost.name]
+  vpc_security_group_ids = [aws_security_group.ghost.id]
 
   # Tag for identification
   tags = {
