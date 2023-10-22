@@ -25,7 +25,7 @@ jobs:
       run: terraform init
 
     - name: Change to Terraform directory
-      run: cd C:/ghostcms/terraform
+      run: cd /c/ghostcms/terraform
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
