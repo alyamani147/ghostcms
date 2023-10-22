@@ -1,7 +1,7 @@
 variable "key_name" {
   description = "The key pair name for the EC2 instance."
   # Update with your key pair name
-  default     = "yghostsshkey"
+  default     = "ghostsshkey"
 }
 
 variable "subnet_id_ghost" {
