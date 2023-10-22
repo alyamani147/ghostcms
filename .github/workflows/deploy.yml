@@ -41,5 +41,5 @@ jobs:
 
     - name: Set up SSH
       run: |
-        echo "${{ secrets.ghostsshkey }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+        echo "${{ secrets.ghostsshkey }}" > ./ssh/id_rsa
+        chmod 600 ./ssh/id_rsa
