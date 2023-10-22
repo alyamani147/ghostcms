@@ -21,9 +21,6 @@ jobs:
       with:
         terraform_version: 1.0.0
 
-    - name: Change to Terraform directory
-      run: cd ./terraform
-
     - name: Print current working directory
       run: pwd
 
