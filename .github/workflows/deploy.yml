@@ -31,8 +31,12 @@ jobs:
       working-directory: ./terraform
       run: terraform init
 
+    - name: Ensure ~/.ssh directory exists
+      run: mkdir -p ~/.ssh
+
     - name: Fetch and add host key
       run: ssh-keyscan ec2-3-123-42-147.eu-central-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+
 
     - name: Use SSH key
       uses: webfactory/ssh-agent@v0.5.3
