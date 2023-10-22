@@ -65,7 +65,7 @@ resource "aws_instance" "ghost" {
 
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "sshghostkey"
+  name = "sshghostkeynew"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
