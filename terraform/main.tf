@@ -18,10 +18,16 @@ resource "aws_instance" "ghost" {
       "sudo apt-get install -y npm",
       "sudo npm install -g ghost-cli",
       "sudo mkdir -p /var/www/ghost",
-      "sudo chown ec2-user:ec2-user /var/www/ghost",
+      "sudo chown $USER:$USER /var/www/ghost",
       "ghost install",
     ]
-  }
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.ssh/id_rsa")
+      host        = self.public_ip
+    }
 
   tags = {
     Name = "GhostCMSInstance"
