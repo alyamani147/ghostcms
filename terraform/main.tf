@@ -11,7 +11,7 @@ resource "aws_instance" "ghost" {
 
   # Tag for identification
   tags = {
-    Name = "Ghost-CMS"
+    Name = "Ghost_CMS"
   }
 
   # Connection settings for provisioners
