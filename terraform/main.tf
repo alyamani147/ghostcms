@@ -47,14 +47,14 @@ resource "aws_instance" "ghost" {
   provisioner "remote-exec" {
     inline = [
       "echo 'Starting provisioner' >> /tmp/provision.log",
-      "/usr/bin/sudo /usr/bin/sudo apt-get update  >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/sudo apt-get install -y nodejs >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/sudo apt-get install -y npm >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/sudo npm install -g ghost-cli >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/sudo mkdir -p /var/www/ghost >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/sudo chown ec2-user:ec2-user /var/www/ghost >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/sudo cd /var/www/ghost >> /tmp/provision.log 2>&1",
-      "/usr/bin/sudo /usr/bin/sudo ghost install >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/yum update -y >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/yum install -y nodejs >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/yum install -y npm >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/npm install -g ghost-cli >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/mkdir -p /var/www/ghost >> /tmp/provision.log 2>&1",
+      "/usr/bin/sudo /usr/bin/chown ec2-user:ec2-user /var/www/ghost >> /tmp/provision.log 2>&1",
+      "cd /var/www/ghost",
+      "/usr/bin/sudo /usr/bin/ghost install >> /tmp/provision.log 2>&1"
     ]
   }
 }
