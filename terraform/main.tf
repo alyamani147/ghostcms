@@ -15,7 +15,7 @@ resource "aws_security_group" "ghost" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["185.76.177.82/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
