@@ -46,6 +46,7 @@ resource "aws_instance" "ghost" {
   # Provisioners for installing and configuring Ghost CMS
   provisioner "remote-exec" {
     inline = [
+      "chmod 400 ./ghostsshkey.pem",
       "echo 'Starting provisioner'",
       "sudo yum update -y",
       "sudo amazon-linux-extras install epel -y",
@@ -65,7 +66,7 @@ resource "aws_instance" "ghost" {
 
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "sshghostkeynew"
+  name = "sshghost"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
