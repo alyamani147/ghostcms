@@ -46,7 +46,6 @@ resource "aws_instance" "ghost" {
   # Provisioners for installing and configuring Ghost CMS
   provisioner "remote-exec" {
     inline = [
-      "chmod 400 ./ghostsshkey.pem",
       "echo 'Starting provisioner'",
       "sudo yum update -y",
       "sudo amazon-linux-extras install epel -y",
@@ -57,19 +56,21 @@ resource "aws_instance" "ghost" {
       "sudo curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -",
       "sudo yum install -y nodejs",
       "sudo yum install -y npm",
+      "sudo npm audit fix --force",
+      "sudo npm install -g npm@10.2.1",
       "node -v",
       "npm -v",
-      "sudo npm install -g ghost-cli",
-      "sudo mkdir -p /var/www/ghost",
-      "sudo chown ec2-user:ec2-user /var/www/ghost",
-      "sudo cd /var/www/ghost",
-      "sudo ghost install",
+      "sudo npm install ghost-cli@latest -g",
+#      "sudo mkdir -p /var/www/ghost",
+#      "sudo chown ec2-user:ec2-user /var/www/ghost",
+#      "sudo cd /var/www/ghost",
+      "sudo ghost install local",
     ]
   }
 
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "sshkeyghostec2"
+  name = "sshkeyEC2ghost"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
