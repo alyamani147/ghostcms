@@ -50,7 +50,7 @@ resource "aws_instance" "ghost" {
       "sudo yum update -y",
       "sudo amazon-linux-extras install epel -y",
       "sudo yum install -y gcc-c++ make",
-      "sudo yum install -y libuv-1.43.0",
+      "sudo yum install -y libuv",
       "sudo curl -sL https://rpm.nodesource.com/setup_18.x | sudo bash -",
       "sudo yum install -y nodejs",
       "node -v",
@@ -65,7 +65,7 @@ resource "aws_instance" "ghost" {
 
 }
 resource "aws_secretsmanager_secret" "ghostkey" {
-  name = "your_secret_name"
+  name = "sshghostkey"
 }
 
 resource "aws_secretsmanager_secret_version" "ghostkey" {
