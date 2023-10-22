@@ -1,12 +1,12 @@
 provider "aws" {
-  region = "eu-central-1"  # Change this to your preferred AWS region
+  region = "eu-central-1"
 }
 
 resource "aws_instance" "ghost" {
-  ami           = "ami-0fb820135757d28fd"  # Amazon Linux 2 (free tier eligible)
-  instance_type = "t2.micro"                # Free tier eligible instance type
+  ami           = "ami-0fb820135757d28fd"
+  instance_type = "t2.micro"
 
-  key_name      = var.key_name  # Replace with your SSH key name
+  key_name      = var.key_name
 
   vpc_security_group_ids = [aws_security_group.ghost.id]
 
@@ -44,7 +44,7 @@ resource "aws_security_group" "ghost" {
     from_port = 22
     to_port   = 22
     protocol  = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Restrict this to your IP address range
+    cidr_blocks = ["0.0.0.0/0"]  # Restricting this to my IP, but since I don't have a real IP yet, will keep it open
   }
 
   egress {
