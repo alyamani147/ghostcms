@@ -30,11 +30,14 @@ resource "aws_instance" "ghost" {
     }
   }
 }
-
+data "aws_security_group" "existing_ghost_sg" {
+  id = "sg-023c2b353a6ff257a"
+}
 
 resource "aws_security_group" "ghost" {
-  id        = sg-023c2b353a6ff257a
+  name        = data.aws_security_group.existing_ghost_sg.name
   description = "Security group for Ghost CMS instance"
+  vpc_id      = data.aws_security_group.existing_ghost_sg.vpc_id
 
   ingress {
     from_port = 22
