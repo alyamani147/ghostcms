@@ -2,14 +2,13 @@ provider "aws" {
   region = var.aws_region_eu-central-1
 }
 resource "aws_security_group" "ghost" {
-  name        = var.security_group_name
-  description = var.security_group_description
+  name        = "ghost_security_group"
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = var.ssh_ingress_cidr_blocks
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -29,6 +28,7 @@ resource "aws_instance" "ghost" {
   instance_type = var.instance_type_t2mirco
   key_name      = var.key_name
   subnet_id     = var.subnet_id_ghost
+  vpc_security_group_ids = [aws_security_group.ghost.name]
 
   # Tag for identification
   tags = {
