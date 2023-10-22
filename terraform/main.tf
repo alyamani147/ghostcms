@@ -2,7 +2,7 @@ provider "aws" {
   region = var.aws_region_eu-central-1
 }
 resource "aws_security_group" "ghost" {
-  name        = "ghost_security_group"
+  id        = "ghost_security_group"
 
   ingress {
     from_port   = 0
