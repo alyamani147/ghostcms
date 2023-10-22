@@ -35,7 +35,7 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: |
-          ${{ secrets.SSH_PRIVATE_KEY }}
+          ${{ secrets.ghostsshkey }}
 
     - name: Terraform Apply
       working-directory: ./terraform
