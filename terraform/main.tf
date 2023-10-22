@@ -22,12 +22,12 @@ resource "aws_instance" "ghost" {
       "ghost install",
     ]
   }
-}
-
 
   tags = {
     Name = "GhostCMSInstance"
   }
+}
+
 
 resource "aws_security_group" "ghost" {
   name        = "ghost_security_group"
