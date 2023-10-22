@@ -33,10 +33,8 @@ resource "aws_instance" "ghost" {
 
 
 resource "aws_security_group" "ghost" {
-  name        = "ghost_security_group"
+  name        = "sg-023c2b353a6ff257a"
   description = "Security group for Ghost CMS instance"
-  vpc_id            = aws_vpc.main.id
-
 
   ingress {
     from_port = 22
