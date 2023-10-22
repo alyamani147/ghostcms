@@ -22,7 +22,11 @@ jobs:
         terraform_version: 1.0.0
 
     - name: Change to Terraform directory
-      run: cd alyamani147/ghostcms/terraform
+      run: cd terraform
+
+    - name: List contents of the Terraform directory
+      run: ls -R
+      continue-on-error: true
 
     - name: Terraform Init
       run: terraform init
