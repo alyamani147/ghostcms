@@ -52,8 +52,8 @@ resource "aws_instance" "ghost" {
       "sudo npm install -g ghost-cli",
       "sudo mkdir -p /var/www/ghost",
       "sudo chown ec2-user:ec2-user /var/www/ghost",
-      "cd /var/www/ghost",
-      "ghost install",
+      "sudo cd /var/www/ghost",
+      "sudo ghost install",
     ]
   }
 }
