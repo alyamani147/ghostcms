@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "ghost" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 (free tier eligible)
+  ami           = "ami-0fb820135757d28fd"  # Amazon Linux 2 (free tier eligible)
   instance_type = "t2.micro"                # Free tier eligible instance type
 
   key_name      = var.key_name  # Replace with your SSH key name
