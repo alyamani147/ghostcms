@@ -33,7 +33,7 @@ resource "aws_instance" "ghost" {
 
 
 resource "aws_security_group" "ghost" {
-  name        = "ghost_security_group_new"
+  name        = "ghost_security_group"
   description = "Security group for Ghost CMS instance"
 
   ingress {
